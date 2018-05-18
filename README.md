@@ -1,6 +1,6 @@
 # Lambda MongoDB cluster database backup to S3
 
-Back up a **MongoDB Atlas** cluster database with replica set to **AWS S3** through a simple **AWS Lambda** function.
+Back up a **MongoDB Atlas** cluster database with replica set to **AWS S3** through a simple **AWS Lambda** function. Result is a ZIP archive with .bson and .metadata.json files for each collection.
 
 If you have a Mongo URI in the form:
 ```
@@ -8,6 +8,8 @@ mongodb://[user]:[pw]@[shards]/[database]?ssl=true&replicaSet=[replSet]&authSour
 ```
 
 Adapted from [alonhar/lambda-mongodb-s3-backup](https://github.com/alonhar/lambda-mongodb-s3-backup) to make it work with MongoDB Atlas cluster databases.
+
+`mongodump` binary is version 3.6.4 (linux-x86_64-amazon).
 
 ___
 
@@ -31,8 +33,8 @@ ___
 | MONGO_USER | Username | Yes |
 | MONGO_PW | Password | Yes |
 | MONGO_AUTH_DB | Name of the auth database | No. Default is `admin` |
-| MONGO_PORT | Database port | No (default is `27017`) |
+| MONGO_PORT | Database port | No. Default is `27017` |
 | MONGO_REPLICA_SET | Name of the replica set in the form `clustername-shard-0` | Yes |
 | MONGO_CLUSTER_SHARD | Name of the cluster shards in the form `clustername-shard-00-00-xxxxx.mongodb.net,clustername-shard-00-01-xxxxx.mongodb.net,clustername-shard-00-02-xxxxx.mongodb.net` | Yes |
-| S3_BUCKET | Name of S3 bucket | Yes |
-| DATE_FORMAT | Backup file name is in the format `[MONGO_DB_NAME]_[DATE_FORMAT]`. For possible date formatting options, refer to [DAY.JS](https://github.com/iamkun/dayjs) | No. Default is `YYYYMMDD_HHmmss` |
+| S3_BUCKET | Name of the S3 bucket | Yes |
+| DATE_FORMAT | Backup file name is in the format `[MONGO_DB_NAME]_[DATE_FORMAT]`. For possible date formatting options, refer to [DAY.JS](https://github.com/iamkun/dayjs/blob/master/docs/en/API-reference.md#format) | No. Default is `YYYYMMDD_HHmmss` |
