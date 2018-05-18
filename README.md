@@ -26,7 +26,7 @@ ___
 ## Environment variables
 
 | Variable | Description | Required? |
-| --- | --- |
+| --- | --- | --- |
 | MONGO_DB_NAME | Name of the database | Yes |
 | MONGO_USER | Username | Yes |
 | MONGO_PW | Password | Yes |
