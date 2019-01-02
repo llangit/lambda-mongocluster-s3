@@ -9,7 +9,7 @@ mongodb://[user]:[pw]@[shards]/[database]?ssl=true&replicaSet=[replSet]&authSour
 
 Adapted from [alonhar/lambda-mongodb-s3-backup](https://github.com/alonhar/lambda-mongodb-s3-backup) to make it work with MongoDB Atlas cluster databases.
 
-`mongodump` binary is version 3.6.4 (linux-x86_64-amazon).
+`mongodump` binary is version 4.0.5 (linux-x86_64-amazon).
 
 ___
 

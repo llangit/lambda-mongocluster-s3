@@ -4,7 +4,7 @@ const AWS = require('aws-sdk');
 const fs = require('fs');
 const url = require('url');
 const dayjs = require('dayjs');
-const zipFolder = require('zip-folder');
+const zipFolder = require('zip-a-folder');
 const exec = require('child_process').exec;
 
 // ENVIRONMENT VARIABLES
