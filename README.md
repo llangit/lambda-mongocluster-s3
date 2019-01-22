@@ -37,4 +37,5 @@ ___
 | MONGO_REPLICA_SET | Name of the replica set in the form `clustername-shard-0` | Yes |
 | MONGO_CLUSTER_SHARD | Name of the cluster shards in the form `clustername-shard-00-00-xxxxx.mongodb.net,clustername-shard-00-01-xxxxx.mongodb.net,clustername-shard-00-02-xxxxx.mongodb.net` | Yes |
 | S3_BUCKET | Name of the S3 bucket | Yes |
+| S3_STORAGE_CLASS | S3 storage class | No, default is Standard |
 | DATE_FORMAT | Backup file name is in the format `[MONGO_DB_NAME]_[DATE_FORMAT]`. For possible date formatting options, refer to [DAY.JS](https://github.com/iamkun/dayjs/blob/master/docs/en/API-reference.md#format) | No. Default is `YYYYMMDD_HHmmss` |

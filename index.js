@@ -18,7 +18,9 @@ const replicaSet = process.env.MONGO_REPLICA_SET;
 const clusterShard = process.env.MONGO_CLUSTER_SHARD;
 // S3
 const bucketName = process.env.S3_BUCKET;
-const s3bucket = new AWS.S3({ params: { Bucket: bucketName } });
+const storageClass = process.env.S3_STORAGE_CLASS || "STANDARD";
+const s3bucket = new AWS.S3({ params: { Bucket: bucketName, StorageClass: storageClass } });
+
 const dateFormat = process.env.DATE_FORMAT || 'YYYYMMDD_HHmmss';
 
 module.exports.handler = function(event, context, cb) {
