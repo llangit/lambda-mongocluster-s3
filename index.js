@@ -4,7 +4,7 @@ const AWS = require('aws-sdk');
 const fs = require('fs');
 const url = require('url');
 const dayjs = require('dayjs');
-const zipFolder = require('zip-a-folder');
+const ZipFolder = require('zip-a-folder');
 const exec = require('child_process').exec;
 
 // ENVIRONMENT VARIABLES
@@ -36,7 +36,7 @@ module.exports.handler = function(event, context, cb) {
         return;
       }
 
-      zipFolder(folderName, filePath, function(err) {
+      ZipFolder.zipFolder(folderName, filePath, function(err) {
         if (err) {
           console.log('ZIP failed: ', err);
         } else {

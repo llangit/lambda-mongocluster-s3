@@ -16,7 +16,7 @@ ___
 ## Setup instructions
 
 1. Clone repository and run `npm install`
-2. ZIP contents of the folder (not the folder itself)
+2. ZIP contents of the folder (not the folder itself, and be sure not to include the .git folder)
 3. Create AWS Lambda function
    - Choose Node.js 8.10 runtime
    - Choose an existing role or create a new one and make sure it has write permissions to the S3 bucket that you want to back up to
