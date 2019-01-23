@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "dayjs": "^1.7.8",
-    "zip-a-folder": "0.0.6"
+    "zip-a-folder": "0.0.7"
   },
   "devDependencies": {},
   "scripts": {

@@ -4,7 +4,7 @@ const AWS = require('aws-sdk');
 const fs = require('fs');
 const url = require('url');
 const dayjs = require('dayjs');
-const zipFolder = require('zip-a-folder');
+const ZipFolder = require('zip-a-folder');
 const exec = require('child_process').exec;
 
 // ENVIRONMENT VARIABLES
@@ -18,7 +18,9 @@ const replicaSet = process.env.MONGO_REPLICA_SET;
 const clusterShard = process.env.MONGO_CLUSTER_SHARD;
 // S3
 const bucketName = process.env.S3_BUCKET;
-const s3bucket = new AWS.S3({ params: { Bucket: bucketName } });
+const storageClass = process.env.S3_STORAGE_CLASS || "STANDARD";
+const s3bucket = new AWS.S3({ params: { Bucket: bucketName, StorageClass: storageClass } });
+
 const dateFormat = process.env.DATE_FORMAT || 'YYYYMMDD_HHmmss';
 
 module.exports.handler = function(event, context, cb) {
@@ -36,7 +38,7 @@ module.exports.handler = function(event, context, cb) {
         return;
       }
 
-      zipFolder(folderName, filePath, function(err) {
+      ZipFolder.zipFolder(folderName, filePath, function(err) {
         if (err) {
           console.log('ZIP failed: ', err);
         } else {

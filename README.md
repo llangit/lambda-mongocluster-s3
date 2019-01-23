@@ -16,7 +16,7 @@ ___
 ## Setup instructions
 
 1. Clone repository and run `npm install`
-2. ZIP contents of the folder (not the folder itself)
+2. ZIP contents of the folder (not the folder itself, and be sure not to include the .git folder)
 3. Create AWS Lambda function
    - Choose Node.js 8.10 runtime
    - Choose an existing role or create a new one and make sure it has write permissions to the S3 bucket that you want to back up to
@@ -37,4 +37,5 @@ ___
 | MONGO_REPLICA_SET | Name of the replica set in the form `clustername-shard-0` | Yes |
 | MONGO_CLUSTER_SHARD | Name of the cluster shards in the form `clustername-shard-00-00-xxxxx.mongodb.net,clustername-shard-00-01-xxxxx.mongodb.net,clustername-shard-00-02-xxxxx.mongodb.net` | Yes |
 | S3_BUCKET | Name of the S3 bucket | Yes |
+| S3_STORAGE_CLASS | S3 storage class | No, default is Standard |
 | DATE_FORMAT | Backup file name is in the format `[MONGO_DB_NAME]_[DATE_FORMAT]`. For possible date formatting options, refer to [DAY.JS](https://github.com/iamkun/dayjs/blob/master/docs/en/API-reference.md#format) | No. Default is `YYYYMMDD_HHmmss` |
