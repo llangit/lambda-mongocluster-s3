@@ -4,6 +4,7 @@
   "description": "Backup a MongoDB cluster database with replica set via mongodump to a S3 bucket.",
   "main": "index.js",
   "dependencies": {
+    "@slack/web-api": "^5.0.1",
     "dayjs": "^1.7.8",
     "zip-a-folder": "0.0.7"
   },

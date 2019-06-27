@@ -6,6 +6,7 @@ const url = require('url');
 const dayjs = require('dayjs');
 const ZipFolder = require('zip-a-folder');
 const exec = require('child_process').exec;
+const { WebClient } = require("@slack/web-api");
 
 // ENVIRONMENT VARIABLES
 // Mongo
@@ -20,6 +21,9 @@ const clusterShard = process.env.MONGO_CLUSTER_SHARD;
 const bucketName = process.env.S3_BUCKET;
 const storageClass = process.env.S3_STORAGE_CLASS || "STANDARD";
 const s3bucket = new AWS.S3({ params: { Bucket: bucketName, StorageClass: storageClass } });
+// Slack
+const slackKey = process.env.SLACK_KEY;
+const slackChannel = process.env.SLACK_CHANNEL;
 
 const dateFormat = process.env.DATE_FORMAT || 'YYYYMMDD_HHmmss';
 
@@ -34,25 +38,25 @@ module.exports.handler = function(event, context, cb) {
   exec(`mongodump -d ${dbName} -u ${username} -p ${password} -o ${folderName} --authenticationDatabase ${authDB} --ssl --port ${port} -h "${replicaSet}/${clusterShard}"`, (error, stdout, stderr) => {
 
       if (error) {
-        console.log('Mongodump failed: ' + error);
+        logMessage('Mongodump failed: ' + error)
         return;
       }
 
       ZipFolder.zipFolder(folderName, filePath, function(err) {
         if (err) {
-          console.log('ZIP failed: ', err);
+          logMessage('ZIP failed: ', err);
         } else {
           fs.readFile(filePath, function(err, data) {
             s3bucket.upload({ Key: fileName + '.zip', Body: data, ContentType: 'application/zip' }, function(err, data) {
               fs.unlink(filePath, function(err) {
                 if (err) {
-                  console.log('Could not delete temp file: ' + err);
+                  logMessage('Could not delete temp file: ' + err);
                 }
               });
               if (err) {
-                console.log('Upload to S3 failed: ' + err);
+                logMessage('Upload to S3 failed: ' + err)
               } else {
-                console.log('Backup completed successfully');
+                logMessage('Backup completed successfully');
               }
             });
           });
@@ -61,4 +65,23 @@ module.exports.handler = function(event, context, cb) {
 
     });
 
+};
+
+const logMessage = async (message) => {
+  try {
+    console.log(message)
+
+    if (slackKey && slackChannel) {
+      const web = new WebClient(slackKey);
+      return await web.chat.postMessage({
+        channel: slackChannel,
+        text: message,
+        icon_emoji: ":cat:",
+        as_user: false,
+        username: "MongoBackupBot"
+      });
+    }
+  } catch (err) {
+    console.log(err);
+  }
 };
