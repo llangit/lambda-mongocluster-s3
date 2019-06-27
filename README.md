@@ -11,6 +11,8 @@ Adapted from [alonhar/lambda-mongodb-s3-backup](https://github.com/alonhar/lambd
 
 `mongodump` binary is version 4.0.5 (linux-x86_64-amazon).
 
+This will write its logs to CloudWatch and can optionally also write to slack (see Environment Variables below).  
+
 ___
 
 ## Setup instructions
@@ -39,3 +41,5 @@ ___
 | S3_BUCKET | Name of the S3 bucket | Yes |
 | S3_STORAGE_CLASS | S3 storage class | No, default is Standard |
 | DATE_FORMAT | Backup file name is in the format `[MONGO_DB_NAME]_[DATE_FORMAT]`. For possible date formatting options, refer to [DAY.JS](https://github.com/iamkun/dayjs/blob/master/docs/en/API-reference.md#format) | No. Default is `YYYYMMDD_HHmmss` |
+| SLACK_KEY | A slack API key obtained from your slack account (looks like xoxp-xxxxxxxxxxx-xxxxxxxxxxx-xxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx) | No |
+| SLACK_CHANNEL | The slack channel to write to | No |
