@@ -1,11 +1,11 @@
 {
   "name": "lambda-mongocluster-s3",
-  "version": "1.1.0",
-  "description": "Backup a MongoDB cluster database with replica set via mongodump to a S3 bucket.",
+  "version": "1.2.0",
+  "description": "Backup a MongoDB (Atlas) database to S3 with Lambda and mongodump",
   "main": "index.js",
   "dependencies": {
-    "dayjs": "^1.7.8",
-    "zip-a-folder": "0.0.7"
+    "archiver": "5.0.0",
+    "dayjs": "1.8.34"
   },
   "devDependencies": {},
   "scripts": {
