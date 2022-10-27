@@ -12,6 +12,7 @@ const bucketName = process.env.S3_BUCKET
 const s3bucket = new AWS.S3({ params: { Bucket: bucketName } })
 const s3StorageClass = process.env.S3_STORAGE_CLASS || 'STANDARD'
 const zipFilename = process.env.ZIP_FILENAME || 'mongodb_backup'
+const folderPrefix = process.env.FOLDER_PREFIX || 'mongodb_backups';
 const dateFormat = process.env.DATE_FORMAT || 'YYYYMMDD_HHmmss'
 
 module.exports.handler = function(_event, _context, _cb) {
@@ -48,7 +49,7 @@ module.exports.handler = function(_event, _context, _cb) {
             return
           }
           s3bucket.upload({
-            Key: fileName + '.zip',
+            Key: `${folderPrefix}/${fileName}.zip`,
             Body: data,
             ContentType: 'application/zip',
             ServerSideEncryption: 'AES256',

@@ -33,6 +33,7 @@ ___
 | S3_BUCKET | Name of the S3 bucket | Yes |
 | S3_STORAGE_CLASS | S3 storage class for the backup. Refer to the [S3 SDK docs](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html) for a list of available options. | No. Default is `STANDARD` |
 | ZIP_FILENAME | Name of the ZIP archive | No. Default is `mongodb_backup` |
+| FOLDER_PREFIX | Name of the Parent folder | No. Default is `mongodb_backups` |
 | DATE_FORMAT | Will be appended to `ZIP_FILENAME` with a `_` separator. Refer to the [DayJS docs](https://day.js.org/docs/en/display/format) for a list of available formatting options. | No. Default is `YYYYMMDD_HHmmss` |
 
 ## Changelog
