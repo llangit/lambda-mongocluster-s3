@@ -30,12 +30,12 @@ exports.handler = async function (_event, _context) {
   }
 
   try {
-		const zip = new AdmZip()
+    const zip = new AdmZip()
     zip.addLocalFolder(folderName)
     zipBuffer = zip.toBuffer()
-	} catch (err) {
-		throw new Error('archive creation failed: ', err)
-	}
+  } catch (err) {
+    throw new Error('archive creation failed: ', err)
+  }
 
   try {
     await s3bucket.upload({
